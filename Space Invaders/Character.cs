@@ -53,6 +53,22 @@ namespace Space_Invaders
         }
         #endregion
 
+        #region Constructors
+        /// <summary>
+        /// Initializes a new Character object.
+        /// </summary>
+        /// <param name="key">The actual character value to store.</param>
+        /// <param name="x">The position of the Character on the X axis.</param>
+        /// <param name="y">The position of the Character on the Y axis.</param>
+        /// <exception cref="ArgumentOutOfRangeException">When either coordinate is lower than zero.</exception>
+        public Character(char key, int x = 0, int y = 0)
+        {
+            this.key = key;
+            this.X = x;
+            this.Y = y;
+        }
+        #endregion
+
         #region Methods
         #region Static
         /// <summary>
