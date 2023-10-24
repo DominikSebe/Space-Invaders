@@ -76,6 +76,19 @@ namespace Space_Invaders
             }
         }
         /// <summary>
+        /// Draw the characters of the object with a specified color.
+        /// </summary>
+        /// <param name="entity">The Entity object, the characters of which to draw.</param>
+        /// <param name="color">A ConsoleColor object to specify the color, the characters to write with.</param>
+        /// <exception cref="NullReferenceException">Thrown when the object can not be converted to an Entity.</exception>
+        public static void Draw(object entity, ConsoleColor color)
+        {
+            foreach (Character character in (entity as Entity).Characters)
+            {
+                character.Draw(color, (entity as Entity).X, (entity as Entity).Y);
+            }
+        }
+        /// <summary>
         /// Clear the space occupied by the drawn characters of the object.
         /// </summary>
         /// <param name="entity">The Entity object, the characters of which to clear.</param>
@@ -87,20 +100,7 @@ namespace Space_Invaders
                 character.Cclear((entity as Entity).X, (entity as Entity).Y);
             }
         }
-        /// <summary>
-        /// Check wether an Entity object and another occupy the same space.
-        /// </summary>
-        /// <param name="entity">The first Entity object used in comparsion.</param>
-        /// <param name="other">The second Entity object used in comparsion.</param>
-        /// <returns>True if the two object occupy the same space.</returns>
-        /// <exception cref="NullReferenceException">Thrown when the either object can not be converted to an Entity.</exception>
-        public static bool Collides(object entity, object other)
-        {
-            return ((entity as Entity).X <= (other as Entity).X && (other as Entity).X <= (entity as Entity).X + (entity as Entity).Width ||
-                (other as Entity).X <= (entity as Entity).X && (entity as Entity).X <= (other as Entity).X + (other as Entity).Width) &&
-                ((entity as Entity).Y <= (other as Entity).Y && (other as Entity).Y <= (entity as Entity).Y + (entity as Entity).Height ||
-                (other as Entity).Y <= (entity as Entity).Y && (entity as Entity).Y <= (other as Entity).Y + (other as Entity).Width);
-        }
+        
         #endregion
 
         #region Non-Static
@@ -130,8 +130,30 @@ namespace Space_Invaders
         public abstract void MoveTo(int x = 0, int y = 0);
         public abstract void Draw();
         public abstract void CClear();
-        public abstract void Collides(object other);
         #endregion
+        #endregion
+        #endregion
+
+        #region Functions
+        #region Static
+        /// <summary>
+        /// Check wether an Entity object and another occupy the same space.
+        /// </summary>
+        /// <param name="entity">The first Entity object used in comparsion.</param>
+        /// <param name="other">The second Entity object used in comparsion.</param>
+        /// <returns>True if the two object occupy the same space.</returns>
+        /// <exception cref="NullReferenceException">Thrown when the either object can not be converted to an Entity.</exception>
+        public static bool Collides(object entity, object other)
+        {
+            return ((entity as Entity).X <= (other as Entity).X && (other as Entity).X <= (entity as Entity).X + (entity as Entity).Width ||
+                (other as Entity).X <= (entity as Entity).X && (entity as Entity).X <= (other as Entity).X + (other as Entity).Width) &&
+                ((entity as Entity).Y <= (other as Entity).Y && (other as Entity).Y <= (entity as Entity).Y + (entity as Entity).Height ||
+                (other as Entity).Y <= (entity as Entity).Y && (entity as Entity).Y <= (other as Entity).Y + (other as Entity).Width);
+        }
+        #endregion
+
+        #region Non-Static
+        public abstract void Collides(object other);
         #endregion
         #endregion
     }
