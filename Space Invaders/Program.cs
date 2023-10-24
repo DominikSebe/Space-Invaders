@@ -10,7 +10,8 @@ namespace Space_Invaders
     {
         static void Main(string[] args)
         {
-
+            int[] a = { };
+            a[0] = 1;
             Console.ReadKey();
         }
     }

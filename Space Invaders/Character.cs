@@ -53,24 +53,6 @@ namespace Space_Invaders
         }
         #endregion
 
-        #region Constructors
-        /// <summary>
-        /// Initialize a new Character object.
-        /// </summary>
-        /// <param name="key">The value of the actual character, that will be written to the console.</param>
-        /// <param name="x">The position of the character on the X axis.</param>
-        /// <param name="y">The position of the character of the Y axis.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when either coordinate is less than zero.</exception>
-        public Character(char key, int x = 0, int y = 0)
-        {
-            this.key = key;
-            if (x < 0) throw new ArgumentOutOfRangeException("x", "X coordinate must be 0 ore more.");
-            this.x = x;
-            if (y < 0) throw new ArgumentOutOfRangeException("y", "Y coordinate must be 0 ore more.");
-            this.y = y;
-        }
-        #endregion
-
         #region Methods
         #region Static
         /// <summary>

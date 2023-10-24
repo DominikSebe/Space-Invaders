@@ -100,7 +100,6 @@ namespace Space_Invaders
                 character.Cclear((entity as Entity).X, (entity as Entity).Y);
             }
         }
-        
         #endregion
 
         #region Non-Static
@@ -129,6 +128,7 @@ namespace Space_Invaders
         public abstract void Move(int x = 0, int y = 0);
         public abstract void MoveTo(int x = 0, int y = 0);
         public abstract void Draw();
+        public abstract void Draw(ConsoleColor color);
         public abstract void CClear();
         #endregion
         #endregion
