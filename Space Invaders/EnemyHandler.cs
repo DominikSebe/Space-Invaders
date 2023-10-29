@@ -14,7 +14,7 @@ namespace Space_Invaders
     internal class EnemyHandler
     {
         #region Members
-        private Invader[] invaders;
+        private List<Invader> invaders;
         private Timer timer;
         private readonly int[,] moves;
         private int moveIndex;
@@ -24,7 +24,7 @@ namespace Space_Invaders
         /// <summary>
         /// Gets the array of Invaders of the object.
         /// </summary>
-        public Invader[] Invaders
+        public List<Invader> Invaders
         {
             get { return this.invaders; }
         }
@@ -36,7 +36,7 @@ namespace Space_Invaders
         /// <exception cref="IndexOutOfRangeException">Thrown when the index points outside of the array of Invaders.</exception>
         public Invader this[int index]
         {
-            get { return invaders[index]; }
+            get { return invaders.ElementAt(index); }
             set { invaders[index] = value; }
         }
         /// <summary>
@@ -53,7 +53,7 @@ namespace Space_Invaders
         /// Initializes a new EnemyHandlers object.
         /// </summary>
         /// <param name="invaders">The Invaders that will be handeled by the object.</param>
-        public EnemyHandler(params Invader[] invaders)
+        public EnemyHandler(List<Invader> invaders)
         {
             this.invaders = invaders;
             this.moveIndex = 0;
@@ -86,7 +86,7 @@ namespace Space_Invaders
         /// </summary>
         public void Move()
         {
-            foreach (Invader invader in this.invaders) invader.Move(this.moves[this.moveIndex, 0], this.moves[this.moveIndex, 1]);
+            invaders.ForEach(invader => invader.Move(this.moves[this.moveIndex, 0], this.moves[this.moveIndex, 1]));
             this.moveIndex++;
         }
         /// <summary>
