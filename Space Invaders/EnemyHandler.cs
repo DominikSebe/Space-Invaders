@@ -67,6 +67,7 @@ namespace Space_Invaders
         ~EnemyHandler()
         {
             timer.Dispose();
+            invaders.ForEach(invader => invader.Dispose());
         }
         #endregion
 
@@ -91,7 +92,7 @@ namespace Space_Invaders
         /// </summary>
         public void Move()
         {
-            invaders.ForEach(invader => invader.Move(this.moves[this.moveIndex, 0], this.moves[this.moveIndex, 1]));
+            invaders.ForEach(invader => invader.Move(this.moves[this.moveIndex % this.moves.GetLength(0), 0], this.moves[this.moveIndex % this.moves.GetLength(0), 1]));
             this.moveIndex++;
         }
         /// <summary>
