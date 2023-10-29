@@ -16,6 +16,16 @@ namespace Space_Invaders
         private bool _disposed;
         #endregion
 
+        #region Properties
+
+        public abstract Character[] Characters { get; protected set; }
+        public abstract Character this[int index] { get; set; }
+        public abstract int X { get; set; }
+        public abstract int Y { get; set; }
+        public abstract int Width { get; }
+        public abstract int Height { get; }
+        #endregion
+
         #region Destructor
         /// <summary>
         /// Destructor of the class, releases managed resources and calls `Dispose()`.
@@ -25,16 +35,6 @@ namespace Space_Invaders
             this.Characters = null;
             Dispose(false);
         }
-        #endregion
-
-        #region Properties
-
-        public abstract Character[] Characters { get; protected set; }
-        public abstract Character this[int index] { get; set; }
-        public abstract int X { get; set; }
-        public abstract int Y { get; set; }
-        public abstract int Width { get; }
-        public abstract int Height { get; }
         #endregion
 
         #region Methods
@@ -79,7 +79,7 @@ namespace Space_Invaders
         /// Draw the characters of the object with a specified color.
         /// </summary>
         /// <param name="entity">The Entity object, the characters of which to draw.</param>
-        /// <param name="color">A ConsoleColor object to specify the color, the characters to write with.</param>
+        /// <param name="color">A ConsoleColor object to specify the color, the characters to draw with.</param>
         /// <exception cref="NullReferenceException">Thrown when the object can not be converted to an Entity.</exception>
         public static void Draw(object entity, ConsoleColor color)
         {
@@ -136,24 +136,30 @@ namespace Space_Invaders
 
         #region Functions
         #region Static
+        private static bool Collides(object entity, Character character)
+        {
+            return ((entity as Entity).X <= character.X && character.X </ (entity as Entity).X + (entity as Entity).Width) &&
+                (entity as Entity).Y <= character.Y && character.Y <= (entity as Entity).Y + (entity as Entity).Height)
+        }
+        private static bool Collides(object entity, Entity other)
+        {
+            return ((entity as Entity).X <= other.X && other.X <= (entity as Entity).X + (entity as Entity).Width ||
+                other.X <= (entity as Entity).X && (entity as Entity).X <= other.X + other.Width) &&
+                ((entity as Entity).Y <= other.Y && other.Y <= (entity as Entity).Y + (entity as Entity).Height ||
+                other.Y <= (entity as Entity).Y && (entity as Entity).Y <= other.Y + other.Width);
+        }
         /// <summary>
-        /// Check wether an Entity object and another occupy the same space.
+        /// Check wether an Entity object and another object occupy the same space.
         /// </summary>
         /// <param name="entity">The first Entity object used in comparsion.</param>
-        /// <param name="other">The second Entity object used in comparsion.</param>
-        /// <returns>True if the two object occupy the same space.</returns>
-        /// <exception cref="NullReferenceException">Thrown when the either object can not be converted to an Entity.</exception>
-        public static bool Collides(object entity, object other)
-        {
-            return ((entity as Entity).X <= (other as Entity).X && (other as Entity).X <= (entity as Entity).X + (entity as Entity).Width ||
-                (other as Entity).X <= (entity as Entity).X && (entity as Entity).X <= (other as Entity).X + (other as Entity).Width) &&
-                ((entity as Entity).Y <= (other as Entity).Y && (other as Entity).Y <= (entity as Entity).Y + (entity as Entity).Height ||
-                (other as Entity).Y <= (entity as Entity).Y && (entity as Entity).Y <= (other as Entity).Y + (other as Entity).Width);
-        }
+        /// <param name="other">The second Entity  or Character object used in comparsion.</param>
+        /// <returns>True if the two object overlap, False otherwise.</returns>
+        /// <exception cref="NullReferenceException">Thrown when the first object can not be converted to an Entity or when the second can not be conerted to either an Entity or a Character..</exception>
+        public static bool Collides(object entity, object other) => (entity is Entity) ? Collides(entity, (entity as Entity)) : Collides(entity, (other as Character));
         #endregion
 
         #region Non-Static
-        public abstract void Collides(object other);
+        public abstract bool Collides(object other);
         #endregion
         #endregion
     }
