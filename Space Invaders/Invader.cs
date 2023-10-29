@@ -36,7 +36,7 @@ namespace Space_Invaders
         /// </summary>
         /// <param name="index">The 0-based index of the element to get or set.</param>
         /// <returns>The Character object of the specified index.</returns>
-        /// <exception cref="IndexOutOfRangeException">Thrown when the specifiedi index points outside of the array of Characters of the object.</exception>
+        /// <exception cref="IndexOutOfRangeException">Thrown when the specified index points outside of the array of Characters of the object.</exception>
         public override Character this[int index] 
         {
             get
@@ -143,35 +143,36 @@ namespace Space_Invaders
         /// <param name="x">The value by which to move the object on the X axis.</param>
         /// <param name="y">The valie by which to move the object on the Y axis.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown either coordinate would be less than zero.</exception>
-        public override void Move(int x = 0, int y = 0) => Entity.Move(this, x, y);
+        public override void Move(int x = 0, int y = 0) => Move(this, x, y);
         /// <summary>
         /// Sets the position of the object.
         /// </summary>
         /// <param name="x">The value to set the X coordinate to.</param>
         /// <param name="y">The value to set the X coordinate to.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when either coordinate is less than zero.</exception>
-        public override void MoveTo(int x = 0, int y = 0) => Entity.MoveTo(this, x, y);
+        public override void MoveTo(int x = 0, int y = 0) => MoveTo(this, x, y);
         /// <summary>
         /// Draw the characters of the object.
         /// </summary>
-        public override void Draw() => Entity.Draw(this);
+        public override void Draw() => Draw(this);
         /// <summary>
         /// Draw the characters of the object with a specified color.
         /// </summary>
         /// <param name="color">A ConsoleColor object to specify the color, the characters to write with.</param>
-        public override void Draw(ConsoleColor color) => Entity.Draw(this, color);
+        public override void Draw(ConsoleColor color) => Draw(this, color);
         /// <summary>
         /// Clear the space occupied by the drawn characters of the object.
         /// </summary>
-        public override void CClear() => Entity.CClear(this);
+        public override void CClear() => CClear(this);
         #endregion
 
         #region Functions
         /// <summary>
         /// Check wether the object and another occupy the same space.
         /// </summary>
-        /// <param name="other"></param>
-        public override void Collides(object other) => Entity.Collides(this, other);
+        /// <param name="other">The other object to use for comparison.</param>
+        /// <returns>True if the two object overlap, False otherwise.</returns>
+        public override bool Collides(object other) => Collides(this, other);
         #endregion
     }
 }
