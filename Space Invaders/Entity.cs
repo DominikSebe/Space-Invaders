@@ -155,7 +155,7 @@ namespace Space_Invaders
         /// <param name="other">The second Entity  or Character object used in comparsion.</param>
         /// <returns>True if the two object overlap, False otherwise.</returns>
         /// <exception cref="NullReferenceException">Thrown when the first object can not be converted to an Entity or when the second can not be conerted to either an Entity or a Character..</exception>
-        public static bool Collides(object entity, object other) => (entity is Entity) ? Collides(entity, (entity as Entity)) : Collides(entity, (other as Character));
+        public static bool Collides(object entity, object other) => (other is Entity) ? Collides(entity, (other as Entity)) : Collides(entity, (other as Character));
         #endregion
 
         #region Non-Static
