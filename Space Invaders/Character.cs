@@ -126,6 +126,7 @@ namespace Space_Invaders
             if (top < 0) throw new ArgumentOutOfRangeException("top", "Y offset must be 0 ore more.");
 
             ConsoleColor cosoleColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
             Draw(character, left, top);
             Console.ForegroundColor = cosoleColor;
         }
@@ -143,7 +144,7 @@ namespace Space_Invaders
             if (top < 0) throw new ArgumentOutOfRangeException("top", "Y offset must be 0 ore more.");
 
             Console.SetCursorPosition(left + (character as Character).X, top + (character as Character).Y);
-            Console.Write((character as Character).key);
+            Console.Write(' ');
         }
         #endregion
 
