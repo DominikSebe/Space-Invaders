@@ -77,7 +77,12 @@ namespace Space_Invaders
         /// </summary>
         /// <param name="enemyHandler">The EnemyHandler, the Invader objects of which to Move.</param>
         /// <exception cref="NullReferenceException">Thrown when the object can not be converted to an EnemyHandler.</exception>
-        public static void Move(object enemyHandler) => (enemyHandler as EnemyHandler).Move();
+        public static void Update(object enemyHandler)
+        {
+            (enemyHandler as EnemyHandler).Cclear();
+            (enemyHandler as EnemyHandler).Move();
+            (enemyHandler as EnemyHandler).Draw(ConsoleColor.Red);
+        }
         #endregion
 
         #region Non-Static
@@ -90,6 +95,21 @@ namespace Space_Invaders
             this.moveIndex++;
         }
         /// <summary>
+        /// Draw all Invaders handled by the object.
+        /// </summary>
+        /// <param name="color">A ConsoleColor object to sepcify in which color to draw the Invdaers.</param>
+        public void Draw(ConsoleColor color)
+        {
+            invaders.ForEach(invader => invader.Draw(color));
+        }
+        /// <summary>
+        /// Clear all drawn Invader objects.
+        /// </summary>
+        public void Cclear()
+        {
+            invaders.ForEach(invader => invader.CClear());
+        }
+        /// <summary>
         /// Intialize a new <c>Threading.Timer</c> object for updating the object.
         /// </summary>
         /// <returns>The new Timer object.</returns>
@@ -97,7 +117,7 @@ namespace Space_Invaders
         public Timer Start()
         {
             if (timer != null) throw new Exception("New timer can not be created before previous is stopped.");
-            this.timer = new Timer(Move, this, 1000, 2000);
+            this.timer = new Timer(Update, this, 1000, 2000);
             return this.timer;
         }
         /// <summary>
