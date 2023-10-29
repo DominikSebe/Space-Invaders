@@ -138,8 +138,8 @@ namespace Space_Invaders
         #region Static
         private static bool Collides(object entity, Character character)
         {
-            return ((entity as Entity).X <= character.X && character.X </ (entity as Entity).X + (entity as Entity).Width) &&
-                (entity as Entity).Y <= character.Y && character.Y <= (entity as Entity).Y + (entity as Entity).Height)
+            return ((entity as Entity).X <= character.X && character.X <= (entity as Entity).X + (entity as Entity).Width &&
+                (entity as Entity).Y <= character.Y && character.Y <= (entity as Entity).Y + (entity as Entity).Height);
         }
         private static bool Collides(object entity, Entity other)
         {
