@@ -56,7 +56,7 @@ namespace Space_Invaders
         { 
             get
             {
-                return this.X;
+                return this.x;
             }
             set
             {
@@ -73,7 +73,7 @@ namespace Space_Invaders
         { 
             get
             {
-                return this.Y;
+                return this.y;
             }
             set
             {
@@ -94,7 +94,7 @@ namespace Space_Invaders
                 for (int i = 1; i < this.characters.Length; i++)
                 {
                     if (this.characters[i].X < min) min = this.characters[i].X;
-                    if (this.characters[i].X > max) min = this.characters[i].X;
+                    if (this.characters[i].X > max) max = this.characters[i].X;
                 }
 
                 return max - min;
@@ -112,7 +112,7 @@ namespace Space_Invaders
                 for (int i = 1; i < this.characters.Length; i++)
                 {
                     if (this.characters[i].X < min) min = this.characters[i].Y;
-                    if (this.characters[i].X > max) min = this.characters[i].Y;
+                    if (this.characters[i].X > max) max = this.characters[i].Y;
                 }
 
                 return max - min;
